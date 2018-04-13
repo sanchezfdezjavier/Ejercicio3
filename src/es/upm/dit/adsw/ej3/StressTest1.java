@@ -1,3 +1,5 @@
+package es.upm.dit.adsw.ej3;
+
 /**
  * Escenarios que fuerzan el comportamiento del juego.
  *

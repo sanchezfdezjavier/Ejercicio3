@@ -1,3 +1,5 @@
+package es.upm.dit.adsw.ej3;
+
 /**
  * Un punto en un espacio 2D.
  *

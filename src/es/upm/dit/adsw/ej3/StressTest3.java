@@ -1,3 +1,5 @@
+package es.upm.dit.adsw.ej3;
+
 import java.util.Random;
 
 /**
@@ -6,8 +8,8 @@ import java.util.Random;
  * @author jose a. manas
  * @version 8-4-2018
  */
-public class StressTest2 {
-    private static final int N_SERPENTS = 4;
+public class StressTest3 {
+    private static final int N_SERPENTS = 2;
 
     public static void main(String[] args) {
         Game.init(Game.TESTING);
@@ -26,5 +28,8 @@ public class StressTest2 {
             Game.setSerpent(serpent);
             new Thread(serpent).start();
         }
-        }
+
+        BallGenerator ballGenerator = new BallGenerator(1000, 50);
+        ballGenerator.start();
+    }
 }
