@@ -19,7 +19,6 @@ import java.lang.*;
 public class RW_Monitor  extends RW_Monitor_0 {
 
     private int numWriters=0;
-    private int numWritersWaiting=0;
     private int numReaders=0;
 
     // Constructor
@@ -44,7 +43,7 @@ public class RW_Monitor  extends RW_Monitor_0 {
     public synchronized void openReading(){
         try{
             // Revisar condicion
-            while(numWriters > 0 || numReaders >= 1){
+            while(numWriters > 0 ){
                 wait();
             }
             }catch (InterruptedException e){
@@ -66,8 +65,7 @@ public class RW_Monitor  extends RW_Monitor_0 {
     // Solicitud de permiso para hacer una escritura. El thread que llama se queda esperando hasta que pueda entrar.
     @Override
     public synchronized void openWriting(){
-        numWritersWaiting++;
-        while(numReaders > 0 || numWriters >0){
+        while(numReaders > 0 || numWriters > 0 ){
             // Este try-catch puede estar mal.
             try {
                 wait();
@@ -75,7 +73,6 @@ public class RW_Monitor  extends RW_Monitor_0 {
 
             }
         }
-        numWritersWaiting--;
         numWriters++;
     }
 
