@@ -5,21 +5,27 @@ import java.lang.*;
 
 public class AppleListMonitor {
 
-    private List<Apple> appleList;
+    private final List<Apple> appleList= new ArrayList<>();
+    private final RW_Monitor_0 monitor_0= new RW_Monitor();
+
 
 
     //Constructor
-    public AppleListMonitor(){
-    }
+    public AppleListMonitor(){}
 
     // Tenemos una manzana mas.
-    public void add(Apple apple){
+    public void add(Apple apple) {
+        this.monitor_0.openWriting();
         this.appleList.add(apple);
+        this.monitor_0.closeWriting();
     }
 
     // Tenemos una manzana menos.
     public void remove(Apple apple){
+        this.monitor_0.openWriting();
         this.appleList.remove(apple);
+        apple.quit();
+        monitor_0.closeWriting();
     }
 
     // Informa si hay alguna manzana cerca del segmento p1-p2.
@@ -35,9 +41,17 @@ public class AppleListMonitor {
 
     //Actua sobre una menzana dentro del segmento p1-p2.
     public Apple hitCloseApple (XY P1, XY P2){
-        Apple manzanaResultado = getCloseApple(P1,P2);
-        // Método remove creado previamente.
-        this.remove(manzanaResultado);
-        return manzanaResultado;
+        try{
+            monitor_0.openWriting();
+            Apple apple= getCloseApple(P1, P2);
+            if(apple != null){
+                appleList.remove(apple);
+                apple.quit();
+            }
+            return apple;
+        // El ' finally' es 'como' el catch, salvo que se ejecuta siempre, aunque el try falle.
+        }finally {
+            monitor_0.closeWriting();
+        }
     }
 }
