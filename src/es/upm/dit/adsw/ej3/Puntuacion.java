@@ -1,6 +1,7 @@
 package es.upm.dit.adsw.ej3;
 
 import java.awt.*;
+import java.util.TreeMap;
 
 /**
  * Contador de puntuacion.
@@ -8,7 +9,9 @@ import java.awt.*;
  * @author jose a. manas
  * @version 8-4-2018
  */
-public class Puntuacion  extends Thread implements Screen.Thing, Runnable{
+public class Puntuacion extends java.lang.Object implements java.lang.Runnable, Screen.Thing{
+
+    // Atributos
     private final Font font;
     private int puntos;
 
@@ -49,12 +52,12 @@ public class Puntuacion  extends Thread implements Screen.Thing, Runnable{
     @Override
     public void run() {
         try{
-            while(true){
-                sleep(1000);
+            while(Game.getState() != Game.FINISHED){
+                Nap.sleep(1000);
                 this.decrement(1);
             }
-        }catch (InterruptedException e){
-            //System.out.print("Se ha interrumpido una hebra");
+        }catch (Exception e){
+
         }
     }
 
@@ -64,7 +67,7 @@ public class Puntuacion  extends Thread implements Screen.Thing, Runnable{
      * @param g pantalla.
      */
     @Override
-    public void paint(Graphics2D g) {
+    public synchronized void paint(Graphics2D g) {
         g.setFont(font);
         g.setColor(Color.BLACK);
         g.drawString("puntos: " + puntos, 10, 20);

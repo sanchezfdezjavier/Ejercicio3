@@ -14,50 +14,73 @@ import java.lang.*;
 
 public class RW_Monitor  extends RW_Monitor_0 {
 
+    private int numWriters=0;
+    private int numWritersWaiting=0;
+    private int numReaders=0;
+
     // Constructor
     public RW_Monitor(){
 
     }
 
     // Getter
+    @Override
     public synchronized int getNReadersIn(){
-        int readersNum= 0;
-
-
-        return readersNum;
+        return this.numReaders;
     }
 
     // Getter
+    @Override
     public synchronized int getNWritersIn(){
-        int writersNum=0;
-
-        return writersNum;
+        return this.numWriters;
     }
 
     // Solicitud de permiso para hacer una lectura. El thread que llama se queda esperando hasta que pueda entrar.
+    @Override
     public synchronized void openReading(){
-
+        try{
+            // Revisar condicion
+            while(numWriters > 0 || numReaders >= 1){
+                wait();
+            }
+            }catch (InterruptedException e){
+                return;
+            }
+            numReaders++;
     }
 
     // Devuelve el permiso de lectura.
+    @Override
     public synchronized void closeReading() throws IllegalMonitorStateException{
-        try{
-            //Codigo
-        }catch(IllegalMonitorStateException e){
-           System.out.println("Error en  el metodo 'closeWriting' de la clase 'RW_Monitor'");
+        if(numReaders <= 0){
+            throw new IllegalMonitorStateException();
         }
+        numReaders--;
+        notifyAll();
     }
 
     // Solicitud de permiso para hacer una escritura. El thread que llama se queda esperando hasta que pueda entrar.
+    @Override
     public synchronized void openWriting(){
-
+        numWritersWaiting++;
+        while(numReaders > 0 || numWriters >0){
+            // Este try-catch puede estar mal
+            try {
+                wait();
+            }catch(InterruptedException e){
+                return;
+            }
+        }
+        numWritersWaiting--;
+        numWriters++;
     }
 
+    @Override
     public synchronized void closeWriting() throws IllegalMonitorStateException{
-        try{
-            //Codigo
-        }catch(IllegalMonitorStateException e){
-            System.out.println("Error en el método 'closeWriting' de la clase 'RW_Monitor");
+        if(numWriters <= 0){
+            throw new IllegalMonitorStateException();
         }
+        numWriters--;
+        notifyAll();
     }
 }
