@@ -1,7 +1,6 @@
 package es.upm.dit.adsw.ej3;
 
 import java.awt.*;
-import java.lang.Thread;
 
 /**
  * Contador de puntuacion.
@@ -9,7 +8,7 @@ import java.lang.Thread;
  * @author jose a. manas
  * @version 8-4-2018
  */
-public class Puntuacion extends Thread implements Screen.Thing{
+public class Puntuacion  extends Thread implements Screen.Thing, Runnable{
     private final Font font;
     private int puntos;
 
@@ -27,7 +26,7 @@ public class Puntuacion extends Thread implements Screen.Thing{
      *
      * @param n a sumar.
      */
-    public void increment(int n) {
+    public synchronized void increment(int n) {
         puntos += n;
     }
 
@@ -36,7 +35,7 @@ public class Puntuacion extends Thread implements Screen.Thing{
      *
      * @param n a restar.
      */
-    public void decrement(int n) {
+    public synchronized void decrement(int n) {
         puntos -= n;
         if (puntos < 0) {
             Game.getSerpent().quit();
