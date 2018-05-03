@@ -13,7 +13,7 @@ import java.util.TreeMap;
  * @author jose a. manas
  * @version 8-4-2018
  */
-public class Puntuacion extends java.lang.Object implements java.lang.Runnable, Screen.Thing{
+public class Puntuacion implements java.lang.Runnable, Screen.Thing{
 
     // Atributos
     private final Font font;

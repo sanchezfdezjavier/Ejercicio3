@@ -5,7 +5,7 @@ import java.lang.*;
 
 /*
 @author Javier Sanchez Fernandez
- */
+*/
 
 public class AppleListMonitor {
 
@@ -49,7 +49,7 @@ public class AppleListMonitor {
             monitor_0.openWriting();
             Apple apple= getCloseApple(P1, P2);
             if(apple != null){
-                appleList.remove(apple);
+                this.appleList.remove(apple);
                 apple.quit();
             }
             return apple;

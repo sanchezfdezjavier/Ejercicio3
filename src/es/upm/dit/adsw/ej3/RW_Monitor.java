@@ -48,7 +48,7 @@ public class RW_Monitor  extends RW_Monitor_0 {
                 wait();
             }
             }catch (InterruptedException e){
-                return;
+
             }
             numReaders++;
     }
@@ -68,11 +68,11 @@ public class RW_Monitor  extends RW_Monitor_0 {
     public synchronized void openWriting(){
         numWritersWaiting++;
         while(numReaders > 0 || numWriters >0){
-            // Este try-catch puede estar mal
+            // Este try-catch puede estar mal.
             try {
                 wait();
             }catch(InterruptedException e){
-                return;
+
             }
         }
         numWritersWaiting--;
