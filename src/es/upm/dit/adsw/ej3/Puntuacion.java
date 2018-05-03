@@ -1,6 +1,7 @@
 package es.upm.dit.adsw.ej3;
 
 import java.awt.*;
+import java.lang.Thread;
 
 /**
  * Contador de puntuacion.
@@ -8,8 +9,7 @@ import java.awt.*;
  * @author jose a. manas
  * @version 8-4-2018
  */
-public class Puntuacion
-        implements Screen.Thing {
+public class Puntuacion extends Thread implements Screen.Thing{
     private final Font font;
     private int puntos;
 
@@ -49,7 +49,14 @@ public class Puntuacion
      */
     @Override
     public void run() {
-        ....
+        try{
+            while(true){
+                sleep(1000);
+                this.decrement(1);
+            }
+        }catch (InterruptedException e){
+            //System.out.print("Se ha interrumpido una hebra");
+        }
     }
 
     /**

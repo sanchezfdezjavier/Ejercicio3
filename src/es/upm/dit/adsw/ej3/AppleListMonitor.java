@@ -24,19 +24,19 @@ public class AppleListMonitor {
     // Informa si hay alguna manzana cerca del segmento p1-p2.
     public Apple getCloseApple(XY P1, XY P2){
         Apple manzanaResultado= null;
-
-        // Que se considera cerca?
-
+        for(Apple apple: this.appleList){
+            if(apple.getXY().isCloseTo(P1, P2)){
+                manzanaResultado=apple;
+            }
+        }
         return manzanaResultado;
-
     }
 
     //Actua sobre una menzana dentro del segmento p1-p2.
     public Apple hitCloseApple (XY P1, XY P2){
-        Apple manzanaResultado= null;
-
-        // Que se considera cerca?
-
+        Apple manzanaResultado= getCloseApple(P1,P2);
+        // Método remove creado previamente.
+        this.remove(manzanaResultado);
         return manzanaResultado;
     }
 }

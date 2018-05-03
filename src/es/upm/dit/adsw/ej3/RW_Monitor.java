@@ -2,6 +2,7 @@ package es.upm.dit.adsw.ej3;
 
 import java.lang.*;
 
+
 /*Es la clase que implementa el mecanismo de lectores-escritores.
         Los nombres de los métodos vienen en el javadoc.
         Este monitor hay que usarlo en varios sitios para proteger las variables locales a la vez que se
@@ -19,7 +20,7 @@ public class RW_Monitor  extends RW_Monitor_0 {
     }
 
     // Getter
-    public int getNReadersIn(){
+    public synchronized int getNReadersIn(){
         int readersNum= 0;
 
 
@@ -27,19 +28,19 @@ public class RW_Monitor  extends RW_Monitor_0 {
     }
 
     // Getter
-    public int getNWritersIn(){
+    public synchronized int getNWritersIn(){
         int writersNum=0;
 
         return writersNum;
     }
 
     // Solicitud de permiso para hacer una lectura. El thread que llama se queda esperando hasta que pueda entrar.
-    public void openReading(){
+    public synchronized void openReading(){
 
     }
 
     // Devuelve el permiso de lectura.
-    public void closeReading() throws IllegalMonitorStateException{
+    public synchronized void closeReading() throws IllegalMonitorStateException{
         try{
             //Codigo
         }catch(IllegalMonitorStateException e){
@@ -48,11 +49,11 @@ public class RW_Monitor  extends RW_Monitor_0 {
     }
 
     // Solicitud de permiso para hacer una escritura. El thread que llama se queda esperando hasta que pueda entrar.
-    public void openWriting(){
+    public synchronized void openWriting(){
 
     }
 
-    public void closeWriting() throws IllegalMonitorStateException{
+    public synchronized void closeWriting() throws IllegalMonitorStateException{
         try{
             //Codigo
         }catch(IllegalMonitorStateException e){
