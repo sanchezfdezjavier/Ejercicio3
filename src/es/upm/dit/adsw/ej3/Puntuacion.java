@@ -3,6 +3,10 @@ package es.upm.dit.adsw.ej3;
 import java.awt.*;
 import java.util.TreeMap;
 
+/*
+@author Javier Sanchez Fernandez
+ */
+
 /**
  * Contador de puntuacion.
  *

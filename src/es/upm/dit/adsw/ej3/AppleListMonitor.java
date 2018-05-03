@@ -3,6 +3,10 @@ package es.upm.dit.adsw.ej3;
 import java.util.*;
 import java.lang.*;
 
+/*
+@author Javier Sanchez Fernandez
+ */
+
 public class AppleListMonitor {
 
     private final List<Apple> appleList= new ArrayList<>();

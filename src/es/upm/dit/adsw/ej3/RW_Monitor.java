@@ -2,6 +2,10 @@ package es.upm.dit.adsw.ej3;
 
 import java.lang.*;
 
+/*
+@author Javier Sanchez Fernandez
+ */
+
 
 /*Es la clase que implementa el mecanismo de lectores-escritores.
         Los nombres de los métodos vienen en el javadoc.
